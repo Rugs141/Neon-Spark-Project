@@ -5,15 +5,16 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     public float playerSpeed = 40f;
-    private Vector2 playerPosition;
 
     public float horizontalMove = 0f;
     private SignScript Sign;
     public GameObject signCurrentlyOn;
 
-    private Vector2 position;
     public GameObject nextTarget;
     public GameObject prevTarget;
+
+    private Vector2 lastTriggerPos;
+    public bool canTriggerLastPoint = true;
 
     private int waypointCount;
     // Start is called before the first frame update
@@ -34,6 +35,10 @@ public class PlayerScript : MonoBehaviour
     private void Movement()
     {
 
+        if (Vector2.Distance(gameObject.transform.position, lastTriggerPos) >= 0.3f)
+        {
+            canTriggerLastPoint = true;
+        }
       
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
@@ -46,17 +51,20 @@ public class PlayerScript : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
         }
 
-        if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.1f)
+        if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.1f && canTriggerLastPoint)
         {
-            //Next
-            // Increment the waypoints positions in the list (both previous and next)
+            lastTriggerPos = transform.position;
+            canTriggerLastPoint = false;
 
             prevTarget = nextTarget;
             nextTarget = nextTarget.GetComponent<PointScript>().nextPoint;
 
         }
-       else if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.1f)
+        if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.1f && canTriggerLastPoint)
         {
+            
+            canTriggerLastPoint = false;
+            lastTriggerPos = transform.position;
 
             nextTarget = prevTarget;
             prevTarget = prevTarget.GetComponent<PointScript>().prevPoint;
@@ -64,15 +72,22 @@ public class PlayerScript : MonoBehaviour
         } 
 
     }
-    private void MovementTracker()
+
+
+    private void Dash()
     {
-        //find out which in the list is next and previous by figuring out which is the closest positive number and closest negative number
-        //hold D will rotate you anticlockwise, A is clockwise
-        for (int i = 0; i < Sign.PositionOfWaypoints.Count; i++)
+
+        
+        //check tag
+        //compare it to the tag currently on
+        // if the tag is different to the one the player is on and the player is in range
+        //get button down then dash the player and change the targets.
+    }
+    private void OnTriggerEnter2D(Collider other)
+    {
+        if(other.CompareTag("Sign") && other.gameObject != signCurrentlyOn)//If this is not the same tag as the sign that ur on 
         {
-            //Sign.PositionOfWaypoints(i).transform.position
-
-
+            //find the neearest cube and teleport to it
         }
     }
 }
