@@ -32,8 +32,8 @@ public class PedestrianScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        detectionTimer -= Time.deltaTime;
-        if (detectionTimer <= 0)
+        destroyTimer -= Time.deltaTime;
+        if (destroyTimer <= 0)
         {
             Destroy(gameObject);
         }

@@ -13,10 +13,11 @@ public class PlayerScript : MonoBehaviour
     public GameObject nextTarget;
     public GameObject prevTarget;
 
+    public GameObject target;
+
     private Vector2 lastTriggerPos;
     public bool canTriggerLastPoint = true;
-
-    private int waypointCount;
+    public float dashCooldown = 1f;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +29,7 @@ public class PlayerScript : MonoBehaviour
     {
         Movement();
 
-       // MovementTracker();
-
+        dashCooldown -= Time.deltaTime;
     }
 
     private void Movement()
@@ -69,25 +69,23 @@ public class PlayerScript : MonoBehaviour
             nextTarget = prevTarget;
             prevTarget = prevTarget.GetComponent<PointScript>().prevPoint;
 
-        } 
+        }
 
     }
 
 
-    private void Dash()
+    public void Dash(GameObject point)
     {
-
-        
-        //check tag
-        //compare it to the tag currently on
-        // if the tag is different to the one the player is on and the player is in range
-        //get button down then dash the player and change the targets.
-    }
-    private void OnTriggerEnter2D(Collider other)
-    {
-        if(other.CompareTag("Sign") && other.gameObject != signCurrentlyOn)//If this is not the same tag as the sign that ur on 
+        if(Input.GetKeyDown(KeyCode.Space) && dashCooldown < 0.1f)
         {
-            //find the neearest cube and teleport to it
+
+            transform.position = Vector2.MoveTowards(transform.position, point.transform.position, playerSpeed * 5f * Time.deltaTime);
+            var pointDashScript = point.GetComponent<PointScript>();
+            Debug.Log(nextTarget);
+            nextTarget = pointDashScript.nextPoint;
+            prevTarget = pointDashScript.prevPoint;
+
+            dashCooldown = 1f;
         }
     }
 }
