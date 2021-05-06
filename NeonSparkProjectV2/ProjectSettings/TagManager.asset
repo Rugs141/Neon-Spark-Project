@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sign
   - Point
+  - Interactable
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,7 @@ public class InteractionScript : MonoBehaviour
     public InteractableScript[] allInteractables;
     public GameObject closestInteractable;
     public float closestInteractableDistance;
+    public PlayerScript playerScript;
 
     public float interactRange = 10f;
     // Start is called before the first frame update
@@ -29,7 +30,7 @@ public class InteractionScript : MonoBehaviour
         {
             float distanceToInteractable = Vector2.Distance(transform.position, Interactable.transform.position);
 
-            if(distanceToInteractable < interactRange && gameObject.transform.parent.GetComponent<PlayerScript>().signCurrentlyOn.gameObject == Interactable.gameObject.transform.parent.gameObject)// == interactable that this is checking
+            if(distanceToInteractable < interactRange /*&& playerScript.signCurrentlyOn.gameObject == Interactable.gameObject.transform.parent.gameObject*/)// == interactable that this is checking
             {
                 if(distanceToInteractable < closestInteractableDistance)
                 {
@@ -44,7 +45,8 @@ public class InteractionScript : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E) && closestInteractable != null)
         {
             Debug.Log("it fully works");
-            Destroy(closestInteractable);
+            //Destroy(closestInteractable);
+            closestInteractable.gameObject.SetActive(false);
         }
     }
     // get all interactablesign in the game
