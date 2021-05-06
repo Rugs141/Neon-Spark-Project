@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sign
+  - Point
+  - Interactable
   layers:
   - Default
   - TransparentFX

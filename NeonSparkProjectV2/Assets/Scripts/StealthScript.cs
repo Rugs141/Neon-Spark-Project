@@ -10,6 +10,9 @@ public class StealthScript : MonoBehaviour
 
     public GameObject pedestrianPrefab;
     private int pedestrianLimit;
+
+    public GameObject pedestrianSpawnPoint1;
+    public GameObject pedestrianSpawnPoint2;
     
     // Update is called once per frame
     void Update()
@@ -18,9 +21,17 @@ public class StealthScript : MonoBehaviour
         float rand = Random.Range(1, 3);// chance to spawn, currently hard coded
         Timer = rand;
 
-        if (gameObject.transform.childCount <= pedestrianLimit && currentTimer <= 0)
+
+        rand = Random.Range(1, 2);
+
+        if (gameObject.transform.childCount <= pedestrianLimit && currentTimer <= 0 && rand == 1)
         {
-            Instantiate(pedestrianPrefab, new Vector2(0,0), Quaternion.identity);
+            Instantiate(pedestrianPrefab, pedestrianSpawnPoint1.transform.position, Quaternion.identity);
+            currentTimer = Timer;
+        }
+        else if (gameObject.transform.childCount <= pedestrianLimit && currentTimer <= 0 && rand == 2)
+        {
+            Instantiate(pedestrianPrefab, pedestrianSpawnPoint2.transform.position, Quaternion.identity);
             currentTimer = Timer;
         }
         else

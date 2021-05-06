@@ -20,22 +20,8 @@ public class PointScript : MonoBehaviour
 
     void Update()
     {
-        CheckDistance();
+    
     }
-    public void CheckDistance()
-    {
-        if(player.signCurrentlyOn != gameObject.transform.parent.gameObject)
-        {
-            if(Vector2.Distance(gameObject.transform.position,player.transform.position) <= distanceBetweenPlayer)
-            {
-                JumpableTarget = true;
-                player.Dash(gameObject);
-            }
-        }
-        // if this is not the sign the player is on
-        
-                // if player is in distance
-            
-    }
+    
 
 }

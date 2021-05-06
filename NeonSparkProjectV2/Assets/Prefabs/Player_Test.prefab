@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5699578028137065689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5884532, y: 2.8147292, z: 0}
+  m_LocalPosition: {x: 4.19, y: 4.7999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,12 +97,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  dashRange: 5
   horizontalMove: 0
   signCurrentlyOn: {fileID: 0}
   nextTarget: {fileID: 0}
   prevTarget: {fileID: 0}
+  allDashPoints: []
+  closestDashPoint: {fileID: 0}
+  closestPointDistance: 0
   canTriggerLastPoint: 1
-  dashScript: {fileID: 0}
+  dashCooldown: 1
 --- !u!50 &5699578028137065685
 Rigidbody2D:
   serializedVersion: 4

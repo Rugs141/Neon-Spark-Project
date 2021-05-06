@@ -15,8 +15,8 @@ public class DashScript : MonoBehaviour
         playerScript = playerScript.GetComponent<PlayerScript>();
     }
 
-
-    private void OnTriggerEnter2D(BoxCollider2D collision)
+    /*
+    private void OnTriggerStay2D(BoxCollider2D collision)
     {
         if (collision.transform.parent.transform.CompareTag("Sign") && playerScript.signCurrentlyOn != collision.gameObject)
         {
@@ -26,5 +26,8 @@ public class DashScript : MonoBehaviour
 
         }
     }
+
+    */
+
 
 }
