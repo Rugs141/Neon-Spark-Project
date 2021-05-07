@@ -172,7 +172,7 @@ public class PlayerScript : MonoBehaviour
         {
             //  transform.position = closestDashPoint.transform.position;
             StartCoroutine(AnimateDash(transform.position, closestDashPoint.transform.position));  // "dashDuration" should maybe be smoothing???
-            signCurrentlyOn = closestDashPoint.transform.parent.gameObject;
+            signCurrentlyOn = closestDashPoint.transform.parent.gameObject.transform.parent.gameObject;
             nextTarget = closestDashPoint.GetComponent<PointScript>().nextPoint;
             prevTarget = closestDashPoint.GetComponent<PointScript>().prevPoint;
             isDashing = true;

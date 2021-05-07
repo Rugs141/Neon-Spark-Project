@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 622668497010765900}
   - component: {fileID: 7432531258415159003}
   - component: {fileID: 8544134618738009828}
+  - component: {fileID: 1228893492635711853}
   m_Layer: 0
   m_Name: Pedestrian_001
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6357347341226965633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.23, y: -8.33, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0a3f6e151cd324846ac1c61f1c1cfcfd, type: 3}
+  m_Sprite: {fileID: -2915922285781024087, guid: 81be9595a3f9bf748a7b12c752bb95e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.28, y: 1.28}
+  m_Size: {x: 0.59, y: 1.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -95,4 +96,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6823a914a70f5504e8c36d0307908b70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 5699578028137065687, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
+  endPosition: {fileID: 5534634504466959413, guid: d4a660d1c3ed6bb43bace5be4536753c, type: 3}
+  walkSpeed: 10
+  SignScanning: {fileID: 0}
   playerDetected: 0
+  walkTimer: 0
+  min: 1
+  max: 11
+  colliderTimer: 5
+--- !u!58 &1228893492635711853
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357347341226965633}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
