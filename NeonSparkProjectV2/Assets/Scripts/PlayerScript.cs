@@ -20,13 +20,18 @@ public class PlayerScript : MonoBehaviour
 
     // make a list of node near player that are not on their current sign
     public PointScript[] allDashPoints;
-    //public List<PointScript> nearDashPoints = new List<PointScript>();
+
+
     public GameObject closestDashPoint;
     public float closestPointDistance;
 
     private Vector2 lastTriggerPos;
     public bool canTriggerLastPoint = true;
-    public float dashCooldown = 1f;
+
+    LineRenderer Line;
+
+    private bool crIsRunning = false;
+    Rigidbody2D rb;
     // Start is called before the first frame update
 
 
@@ -34,6 +39,8 @@ public class PlayerScript : MonoBehaviour
     {
         allDashPoints = GameObject.Find("Level").GetComponentsInChildren<PointScript>();
         Sign = signCurrentlyOn.GetComponent<SignScript>();
+        Line = gameObject.GetComponent<LineRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
@@ -44,11 +51,28 @@ public class PlayerScript : MonoBehaviour
 
         Movement();
 
-
+        LineStuff();
         // dashCooldown -= Time.deltaTime;
     }
 
+    private void LineStuff()
+    {
+        // if not dashing, and they have valid point
+        if (isDashing == false && closestDashPoint != null)
+        {
+            // draw line
+            Line.enabled = true;
+            Line.SetPosition(0, transform.position);
+            Line.SetPosition(1, closestDashPoint.transform.position);
+        }
+        else
+        {
+            Line.enabled = false;
+        }
+        
 
+
+    }
 
     private void UpdateDashPoint()
     {
@@ -74,6 +98,11 @@ public class PlayerScript : MonoBehaviour
                 }
             }
 
+            if(closestDashPoint != null)
+            {
+                LineStuff();
+            }
+
         }
 
 
@@ -96,19 +125,19 @@ public class PlayerScript : MonoBehaviour
 
         if (isDashing == false)
         {
-            horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
-            if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == 1)
+            //horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
+            //if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == 1)
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                transform.position = Vector2.MoveTowards(transform.position, nextTarget.transform.position, playerSpeed * Time.deltaTime);
-            }
-            if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == -1)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
+                if(Vector3.Dot(MoveDir(), (nextTarget.transform.position - transform.position).normalized) > 0.75f)
+                    transform.position = Vector2.MoveTowards(transform.position, nextTarget.transform.position, playerSpeed * Time.deltaTime);
+                else if (Vector3.Dot(MoveDir(), (prevTarget.transform.position - transform.position).normalized) > 0.75f)
+                    transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
             }
 
             if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.1f && canTriggerLastPoint)
             {
-                lastTriggerPos = transform.position;
+                lastTriggerPos = nextTarget.transform.position;
                 canTriggerLastPoint = false;
 
                 prevTarget = nextTarget;
@@ -119,7 +148,7 @@ public class PlayerScript : MonoBehaviour
             {
 
                 canTriggerLastPoint = false;
-                lastTriggerPos = transform.position;
+                lastTriggerPos = prevTarget.transform.position;
 
                 nextTarget = prevTarget;
                 prevTarget = prevTarget.GetComponent<PointScript>().prevPoint;
@@ -130,6 +159,11 @@ public class PlayerScript : MonoBehaviour
             ImprovedDash();
         }
 
+    }
+
+    private Vector3 MoveDir()
+    {
+        return new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
     }
 
     private void ImprovedDash()
@@ -143,9 +177,8 @@ public class PlayerScript : MonoBehaviour
             prevTarget = closestDashPoint.GetComponent<PointScript>().prevPoint;
             isDashing = true;
         }
+        
     }
-
-
     IEnumerator AnimateDash(Vector2 fromPos, Vector2 toPos)   // maybe don't need "duration" at all!?!?
     {
         // while player is not yet at target
@@ -160,13 +193,6 @@ public class PlayerScript : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         //print("Dash coroutine is now finished.");
     }
-
-
-
-    // if player pressed DASH
-    // if there's a valid closest dash node
-    // dash to it  (LERP with easing animation curve)
-
 }
 
 
