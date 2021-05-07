@@ -1,10 +1,7 @@
 fileFormatVersion: 2
-guid: 5948c82ec605bd2449cbc3e2d4bd4ff4
+guid: e30f120498563e1418b060da06c99388
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 8363080024894765318
-    second: Deans Dog OFF 128x Purple_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -138,28 +135,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Deans Dog OFF 128x Purple_0
-      rect:
-        serializedVersion: 2
-        x: 86
-        y: 45
-        width: 32
-        height: 34
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 609740029f0af0470800000000000000
-      internalID: 8363080024894765318
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []

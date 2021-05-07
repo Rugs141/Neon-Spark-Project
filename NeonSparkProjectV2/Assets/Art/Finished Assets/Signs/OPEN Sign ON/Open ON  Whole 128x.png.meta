@@ -1,7 +1,10 @@
 fileFormatVersion: 2
 guid: 7320058b9d103e94e807f18332d0b0bb
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -8627592558821286774
+    second: Open ON  Whole 128x_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -135,7 +138,28 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Open ON  Whole 128x_0
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 49
+        width: 114
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8c57a85742a44880800000000000000
+      internalID: -8627592558821286774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

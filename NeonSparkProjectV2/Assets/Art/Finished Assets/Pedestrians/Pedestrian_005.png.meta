@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5948c82ec605bd2449cbc3e2d4bd4ff4
+guid: 88f79646d34b480428c3503df8de1faa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8363080024894765318
-    second: Deans Dog OFF 128x Purple_0
+      213: -661143046031456185
+    second: Pedestrian_005_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -140,13 +140,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Deans Dog OFF 128x Purple_0
+      name: Pedestrian_005_0
       rect:
         serializedVersion: 2
-        x: 86
-        y: 45
-        width: 32
-        height: 34
+        x: 18
+        y: 8
+        width: 64
+        height: 110
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 609740029f0af0470800000000000000
-      internalID: 8363080024894765318
+      spriteID: 748439b07e523d6f0800000000000000
+      internalID: -661143046031456185
       vertices: []
       indices: 
       edges: []
