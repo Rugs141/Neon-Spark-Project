@@ -1021,7 +1021,7 @@ PrefabInstance:
       objectReference: {fileID: 563375260}
     - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: pedestrianLimit
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: randomMin

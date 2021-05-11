@@ -1,15 +1,18 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class PedestrianScript : MonoBehaviour
 {
-    public PlayerScript player;
+    public PlayerScript player; // Player script
     private Collider2D pedestrianCollider; // for detecting the signs and player
-    public GameObject endPosition;
-    public float walkSpeed;
+    public GameObject endPosition; //position where the pedestrian will end up at
 
+    public float walkSpeed; // speed at which the pedestrian walks
     private bool IsWalking = true;
+
+    public bool IsDetecting;
 
     private float detectionTimer = 2f; // for use in the timing of the pedestrians 'walking' and 'searching proceedures
     private float detectionTimerMax;
@@ -23,15 +26,24 @@ public class PedestrianScript : MonoBehaviour
     public int min;
     public int max;
 
-    public float colliderTimer = 5f;
+    public GameObject[] AllSigns;
+    public float lookingForPlayerTimer = 5f;
+    private float readyToDetectTimer;
+
+
+    public Sprite questionMark;
+    public Sprite excalMark;
     // Start is called before the first frame update
 
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
         walkTimer = 100f;
-        // HACK
-        SignScanning = GameObject.Find("Open ON  Whole 128x_0");
+        AllSigns = GameObject.FindGameObjectsWithTag("Sign");
+        rand = UnityEngine.Random.Range(0, AllSigns.Length);// randomly chose a sign
+        SignScanning = AllSigns[rand];
+        readyToDetectTimer = UnityEngine.Random.Range(min,max);
+        walkSpeed = UnityEngine.Random.Range(2, 5);
     }
 
 
@@ -39,21 +51,32 @@ public class PedestrianScript : MonoBehaviour
     void Update()
     {
         walkTimer -= Time.deltaTime;
-        if (walkTimer >= 0.1f && IsWalking == true)
+
+        Walking();  // if the pedestrian is allowed to walk
+
+
+        // if they have lucked out to look up
+        if (rand >= 2 && lookingForPlayerTimer >= 0.1f)
         {
-            transform.position = Vector2.MoveTowards(transform.position, endPosition.transform.position, walkSpeed * Time.deltaTime);
-            rand = Random.Range(0, 4);
+            // randomize a time for the pedestrian to look up
+            readyToDetectTimer -= Time.deltaTime;
+            if(readyToDetectTimer <= 0.1)
+            {
+                 lookingForPlayerTimer -= Time.deltaTime;
+                IsWalking = false;
+
+
+                Detecting(SignScanning);
+                //Instantiate(questionMark, new Vector3(SignScanning.transform.position, SignScanning.transform.position + 1f),Quaternion.identity);
+                IsDetecting = true;
+                 Debug.Log("checkingforpeeps");
+            }
+            
         }
-        if (rand >= 2 && colliderTimer >= 0.1f)
-        {
-            colliderTimer -= Time.deltaTime;
-            IsWalking = false;
-            Detecting();
-            Debug.Log("checkingforpeeps");
-        }
-        else if (colliderTimer <= 0.1f)
+        else if (lookingForPlayerTimer <= 0.1f)
         {
             IsWalking = true;
+            IsDetecting = false;
             Debug.Log("nolongercheckingforpeeps");
 
         }
@@ -69,7 +92,16 @@ public class PedestrianScript : MonoBehaviour
 
     }
 
-    private void Detecting()
+    private void Walking()
+    {
+        if (walkTimer >= 0.1f && IsWalking == true)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, endPosition.transform.position, walkSpeed * Time.deltaTime);
+            rand = UnityEngine.Random.Range(0, 4);
+        }
+    }
+
+    private void Detecting(GameObject SignScanning)
     {
         if (player.signCurrentlyOn != null)
         {

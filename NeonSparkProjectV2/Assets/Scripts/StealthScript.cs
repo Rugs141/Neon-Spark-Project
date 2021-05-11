@@ -11,37 +11,60 @@ public class StealthScript : MonoBehaviour
     public GameObject pedestrianPrefab;
     public int pedestrianLimit;
     public GameObject pedestrianSpawnPoint1;
-    public GameObject pedestrianSpawnPoint2;
-    private GameObject pedestrianList;
+    public GameObject pedestrianList;
+    public PedestrianScript[] allPedestrians;
 
+    private int rand;
     public int randomMin;
     public int randomMax;
+
+    //have a reference to all the pedestrians and check if there looking, if too many are then make them not be able to look
+    //maybe they can ask the stealth script if they can look
+
     private void Start()
     {
        pedestrianList = GameObject.Find("Pedestrians");
+       allPedestrians = PedestrianScript.FindObjectsOfType<>;
+        int rand = Random.Range(randomMin, randomMax);
     }
     // Update is called once per frame
     void Update()
     {
         Timer -= Time.deltaTime;
-        int rand = Random.Range(randomMin, randomMax);
+      ;
         if (Timer <= 0)
         { 
-            
             Timer = rand;
         }
-        int pedestrianSpawnRand = Random.Range(0, 2);
+
         //check if the list of pedestrians is lower than the limit and the timer to spawn a pedestrians is lower than zero
-        if (pedestrianList.transform.childCount <= pedestrianLimit && Timer <= 0.1 && pedestrianSpawnRand == 0)
+        if (pedestrianList.transform.childCount <= (pedestrianLimit - 1) && Timer <= 0.1)
         {
+            //check all pedestrians to see if they are detecting or if they will detect
+            // if so dont let the next pedestrian spawned detect
+            int amountOfPedestriansScanning = 0;
+            foreach (PedestrianScript pedestrian in allPedestrians)
+            {
+                if(pedestrian.IsDetecting == true)
+                {
+                    //check which sign is being detected by this pedestrian
+                    GameObject pedestrianSignScanning = pedestrian.SignScanning;
+                    amountOfPedestriansScanning++;
+                      
+                }
+            }
+
+            if(amountOfPedestriansScanning <= pedestrianLimit)
+            {
+                //pedestrians can no longer look up
+                //pedestrian.allowedToDetect = false
+            }
+
+
             Instantiate(pedestrianPrefab, pedestrianSpawnPoint1.transform.position, Quaternion.identity, pedestrianList.transform);
             Timer = rand;
+            rand = UnityEngine.Random.Range(randomMin, randomMax);
             
-        }
-        else if (pedestrianList.transform.childCount <= pedestrianLimit && Timer <= 0 && pedestrianSpawnRand == 1)
-        {
-            Instantiate(pedestrianPrefab, pedestrianSpawnPoint2.transform.position, Quaternion.identity, pedestrianList.transform);
-            Timer = rand;
         }
         else
         {

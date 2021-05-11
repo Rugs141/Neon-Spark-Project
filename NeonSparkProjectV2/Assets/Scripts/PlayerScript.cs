@@ -88,7 +88,7 @@ public class PlayerScript : MonoBehaviour
             float distanceToPoint = Vector2.Distance(point.transform.position, transform.position);
 
             // if within range and not the same sign
-            if (distanceToPoint < dashRange && signCurrentlyOn.gameObject != point.transform.parent.gameObject)
+            if (distanceToPoint < dashRange && signCurrentlyOn.gameObject != point.gameObject.transform.parent.transform.parent.gameObject)
             {
                 // find closest node to player
                 if (distanceToPoint < closestPointDistance)
@@ -117,11 +117,12 @@ public class PlayerScript : MonoBehaviour
 
     private void Movement()
     {
-
-        if (Vector2.Distance(gameObject.transform.position, lastTriggerPos) >= 0.3f)
+        
+        if (Vector2.Distance(gameObject.transform.position, lastTriggerPos) >= 0.1f)
         {
             canTriggerLastPoint = true;
         }
+        
 
         if (isDashing == false)
         {
@@ -135,7 +136,7 @@ public class PlayerScript : MonoBehaviour
                     transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
             }
 
-            if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.1f && canTriggerLastPoint)
+            if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.5f && canTriggerLastPoint)
             {
                 lastTriggerPos = nextTarget.transform.position;
                 canTriggerLastPoint = false;
@@ -144,7 +145,7 @@ public class PlayerScript : MonoBehaviour
                 nextTarget = nextTarget.GetComponent<PointScript>().nextPoint;
 
             }
-            if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.1f && canTriggerLastPoint)
+            if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.5f && canTriggerLastPoint)
             {
 
                 canTriggerLastPoint = false;
