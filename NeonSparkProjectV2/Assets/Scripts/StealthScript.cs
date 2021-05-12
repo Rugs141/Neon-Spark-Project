@@ -12,7 +12,7 @@ public class StealthScript : MonoBehaviour
     public int pedestrianLimit;
     public GameObject pedestrianSpawnPoint1;
     public GameObject pedestrianList;
-    public PedestrianScript[] allPedestrians;
+    public List<GameObject> allPedestrians = new List<GameObject>();
 
     private int rand;
     public int randomMin;
@@ -22,16 +22,15 @@ public class StealthScript : MonoBehaviour
     //maybe they can ask the stealth script if they can look
 
     private void Start()
-    {
-       pedestrianList = GameObject.Find("Pedestrians");
-       allPedestrians = PedestrianScript.FindObjectsOfType<>;
+    {  
         int rand = Random.Range(randomMin, randomMax);
+        pedestrianList = GameObject.Find("Pedestrians");
     }
     // Update is called once per frame
     void Update()
     {
+
         Timer -= Time.deltaTime;
-      ;
         if (Timer <= 0)
         { 
             Timer = rand;
@@ -40,10 +39,10 @@ public class StealthScript : MonoBehaviour
         //check if the list of pedestrians is lower than the limit and the timer to spawn a pedestrians is lower than zero
         if (pedestrianList.transform.childCount <= (pedestrianLimit - 1) && Timer <= 0.1)
         {
-            //check all pedestrians to see if they are detecting or if they will detect
+            //check all pedestrians to see if they arde detecting or if they will detect
             // if so dont let the next pedestrian spawned detect
             int amountOfPedestriansScanning = 0;
-            foreach (PedestrianScript pedestrian in allPedestrians)
+          /*  foreach (PedestrianScript pedestrian in allPedestrians)
             {
                 if(pedestrian.IsDetecting == true)
                 {
@@ -52,7 +51,7 @@ public class StealthScript : MonoBehaviour
                     amountOfPedestriansScanning++;
                       
                 }
-            }
+            }*/
 
             if(amountOfPedestriansScanning <= pedestrianLimit)
             {
@@ -60,10 +59,13 @@ public class StealthScript : MonoBehaviour
                 //pedestrian.allowedToDetect = false
             }
 
-
+            GameObject pedestrian;
             Instantiate(pedestrianPrefab, pedestrianSpawnPoint1.transform.position, Quaternion.identity, pedestrianList.transform);
+            //allPedestrians.Add(pedestrian);
             Timer = rand;
             rand = UnityEngine.Random.Range(randomMin, randomMax);
+
+
             
         }
         else

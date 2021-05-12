@@ -131,9 +131,20 @@ public class PlayerScript : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
                 if(Vector3.Dot(MoveDir(), (nextTarget.transform.position - transform.position).normalized) > 0.75f)
+                {
                     transform.position = Vector2.MoveTowards(transform.position, nextTarget.transform.position, playerSpeed * Time.deltaTime);
+                    var test = gameObject.GetComponent<SpriteRenderer>();
+                    test.flipX = false;
+                }
+
                 else if (Vector3.Dot(MoveDir(), (prevTarget.transform.position - transform.position).normalized) > 0.75f)
+                {
+
                     transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
+                    var test = gameObject.GetComponent<SpriteRenderer>();
+                    test.flipX = true;
+                }
+
             }
 
             if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.5f && canTriggerLastPoint)
