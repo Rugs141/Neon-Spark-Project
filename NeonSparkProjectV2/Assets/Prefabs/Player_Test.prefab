@@ -97,7 +97,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 10
+  dashDuration: 1
+  dashSmoothing: 6
   dashRange: 5
+  isDashing: 0
   horizontalMove: 0
   signCurrentlyOn: {fileID: 0}
   nextTarget: {fileID: 0}
