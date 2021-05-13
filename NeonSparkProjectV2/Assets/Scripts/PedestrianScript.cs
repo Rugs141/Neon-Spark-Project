@@ -81,7 +81,7 @@ public class PedestrianScript : MonoBehaviour
             }
 
         }
-        else if (lookingForPlayerTimer <= 0.1f) // once the detecting timer is up
+        if (lookingForPlayerTimer <= 0.1f) // once the detecting timer is up
         {
             IsWalking = true;
             IsDetecting = false;

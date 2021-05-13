@@ -19,7 +19,9 @@ public class PlayerScript : MonoBehaviour
     public GameObject prevTarget;
 
     // make a list of node near player that are not on their current sign
-    public PointScript[] allDashPoints;
+    public PointScript[] signPoints;
+    public PointScript[] exitPoints;
+    public PointScript[] allPoints;
 
 
     public GameObject closestDashPoint;
@@ -37,7 +39,8 @@ public class PlayerScript : MonoBehaviour
 
     void Start()
     {
-        allDashPoints = GameObject.Find("Level").GetComponentsInChildren<PointScript>();
+        signPoints = GameObject.Find("Signs").GetComponentsInChildren<PointScript>();
+
         Sign = signCurrentlyOn.GetComponent<SignScript>();
         Line = gameObject.GetComponent<LineRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -82,7 +85,7 @@ public class PlayerScript : MonoBehaviour
         closestPointDistance = dashRange + 1;
 
         // make list of nodes within dash range of player
-        foreach (PointScript point in allDashPoints)
+        foreach (PointScript point in signPoints)
         {
 
             float distanceToPoint = Vector2.Distance(point.transform.position, transform.position);
@@ -200,7 +203,6 @@ public class PlayerScript : MonoBehaviour
             yield return null;
         }
         isDashing = false;
-        print("Dash completed!");
 
         //yield return new WaitForSeconds(3f);
         //print("Dash coroutine is now finished.");

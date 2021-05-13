@@ -45,13 +45,16 @@ public class GameManager : MonoBehaviour
         if(AllUnactive)
         {
             ExitSignOff.SetActive(false);
+            Debug.Log("All are unactive");
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.transform.gameObject.name);
         if(collision.CompareTag("Player") && AllUnactive)
         {
+            print("should work");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
