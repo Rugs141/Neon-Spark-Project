@@ -45,6 +45,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 181008813
+    locked: 0
+  - name: SignsON
+    uniqueID: 2371650509
+    locked: 0
+  - name: Interactable
+    uniqueID: 3112535715
+    locked: 0
+  - name: Pizza
+    uniqueID: 3175603125
+    locked: 0
   - name: PlayerSpark
     uniqueID: 1761022103
+    locked: 0
+  - name: Pedestrians
+    uniqueID: 2949284055
+    locked: 0
+  - name: Spotlight
+    uniqueID: 3426940405
     locked: 0
