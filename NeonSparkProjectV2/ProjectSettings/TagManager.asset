@@ -7,6 +7,7 @@ TagManager:
   - Sign
   - Point
   - Interactable
+  - ExitSign
   layers:
   - Default
   - TransparentFX

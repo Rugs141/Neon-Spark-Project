@@ -36,8 +36,6 @@ public class InteractionScript : MonoBehaviour
                 {
                     closestInteractable = Interactable.gameObject;
                     closestInteractableDistance = distanceToInteractable;
-
-                    Debug.Log("it kinda works");
                 }
             }
         }

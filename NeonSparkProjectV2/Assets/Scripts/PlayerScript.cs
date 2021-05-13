@@ -20,13 +20,18 @@ public class PlayerScript : MonoBehaviour
 
     // make a list of node near player that are not on their current sign
     public PointScript[] allDashPoints;
-    //public List<PointScript> nearDashPoints = new List<PointScript>();
+
+
     public GameObject closestDashPoint;
     public float closestPointDistance;
 
     private Vector2 lastTriggerPos;
     public bool canTriggerLastPoint = true;
-    public float dashCooldown = 1f;
+
+    LineRenderer Line;
+
+    private bool crIsRunning = false;
+    Rigidbody2D rb;
     // Start is called before the first frame update
 
 
@@ -34,6 +39,8 @@ public class PlayerScript : MonoBehaviour
     {
         allDashPoints = GameObject.Find("Level").GetComponentsInChildren<PointScript>();
         Sign = signCurrentlyOn.GetComponent<SignScript>();
+        Line = gameObject.GetComponent<LineRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 
@@ -44,11 +51,28 @@ public class PlayerScript : MonoBehaviour
 
         Movement();
 
-
+        LineStuff();
         // dashCooldown -= Time.deltaTime;
     }
 
+    private void LineStuff()
+    {
+        // if not dashing, and they have valid point
+        if (isDashing == false && closestDashPoint != null)
+        {
+            // draw line
+            Line.enabled = true;
+            Line.SetPosition(0, transform.position);
+            Line.SetPosition(1, closestDashPoint.transform.position);
+        }
+        else
+        {
+            Line.enabled = false;
+        }
+        
 
+
+    }
 
     private void UpdateDashPoint()
     {
@@ -64,7 +88,7 @@ public class PlayerScript : MonoBehaviour
             float distanceToPoint = Vector2.Distance(point.transform.position, transform.position);
 
             // if within range and not the same sign
-            if (distanceToPoint < dashRange && signCurrentlyOn.gameObject != point.transform.parent.gameObject)
+            if (distanceToPoint < dashRange && signCurrentlyOn.gameObject != point.gameObject.transform.parent.transform.parent.gameObject)
             {
                 // find closest node to player
                 if (distanceToPoint < closestPointDistance)
@@ -72,6 +96,11 @@ public class PlayerScript : MonoBehaviour
                     closestDashPoint = point.gameObject;
                     closestPointDistance = distanceToPoint;
                 }
+            }
+
+            if(closestDashPoint != null)
+            {
+                LineStuff();
             }
 
         }
@@ -88,38 +117,50 @@ public class PlayerScript : MonoBehaviour
 
     private void Movement()
     {
-
-        if (Vector2.Distance(gameObject.transform.position, lastTriggerPos) >= 0.3f)
+        
+        if (Vector2.Distance(gameObject.transform.position, lastTriggerPos) >= 0.1f)
         {
             canTriggerLastPoint = true;
         }
+        
 
         if (isDashing == false)
         {
-            horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
-            if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == 1)
+            //horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
+            //if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == 1)
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                transform.position = Vector2.MoveTowards(transform.position, nextTarget.transform.position, playerSpeed * Time.deltaTime);
-            }
-            if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == -1)
-            {
-                transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
+                if(Vector3.Dot(MoveDir(), (nextTarget.transform.position - transform.position).normalized) > 0.75f)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, nextTarget.transform.position, playerSpeed * Time.deltaTime);
+                    var test = gameObject.GetComponent<SpriteRenderer>();
+                    test.flipX = false;
+                }
+
+                else if (Vector3.Dot(MoveDir(), (prevTarget.transform.position - transform.position).normalized) > 0.75f)
+                {
+
+                    transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
+                    var test = gameObject.GetComponent<SpriteRenderer>();
+                    test.flipX = true;
+                }
+
             }
 
-            if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.1f && canTriggerLastPoint)
+            if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.5f && canTriggerLastPoint)
             {
-                lastTriggerPos = transform.position;
+                lastTriggerPos = nextTarget.transform.position;
                 canTriggerLastPoint = false;
 
                 prevTarget = nextTarget;
                 nextTarget = nextTarget.GetComponent<PointScript>().nextPoint;
 
             }
-            if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.1f && canTriggerLastPoint)
+            if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.5f && canTriggerLastPoint)
             {
 
                 canTriggerLastPoint = false;
-                lastTriggerPos = transform.position;
+                lastTriggerPos = prevTarget.transform.position;
 
                 nextTarget = prevTarget;
                 prevTarget = prevTarget.GetComponent<PointScript>().prevPoint;
@@ -132,20 +173,24 @@ public class PlayerScript : MonoBehaviour
 
     }
 
+    private Vector3 MoveDir()
+    {
+        return new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+    }
+
     private void ImprovedDash()
     {
         if (Input.GetKeyDown(KeyCode.Space) && closestDashPoint != null && isDashing == false)
         {
             //  transform.position = closestDashPoint.transform.position;
             StartCoroutine(AnimateDash(transform.position, closestDashPoint.transform.position));  // "dashDuration" should maybe be smoothing???
-            signCurrentlyOn = closestDashPoint.transform.parent.gameObject;
+            signCurrentlyOn = closestDashPoint.transform.parent.gameObject.transform.parent.gameObject;
             nextTarget = closestDashPoint.GetComponent<PointScript>().nextPoint;
             prevTarget = closestDashPoint.GetComponent<PointScript>().prevPoint;
             isDashing = true;
         }
+        
     }
-
-
     IEnumerator AnimateDash(Vector2 fromPos, Vector2 toPos)   // maybe don't need "duration" at all!?!?
     {
         // while player is not yet at target
@@ -160,13 +205,6 @@ public class PlayerScript : MonoBehaviour
         //yield return new WaitForSeconds(3f);
         //print("Dash coroutine is now finished.");
     }
-
-
-
-    // if player pressed DASH
-    // if there's a valid closest dash node
-    // dash to it  (LERP with easing animation curve)
-
 }
 
 
