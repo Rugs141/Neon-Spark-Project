@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public enum GameState { running, paused, completed, fail}
 
     public InteractableScript[] allInteractables;
-    private List<>
+    private bool AllUnactive;
+
+    public GameObject ExitSignOff;
 
 
     //reference to the stealth stuff (most likely move the stealth stuff here
@@ -19,17 +21,38 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         allInteractables = GameObject.Find("Interactables").GetComponentsInChildren<InteractableScript>();
+        ExitSignOff.SetActive(true);
+        AllUnactive = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        foreach (var item in allInteractables)
+        for(int i = 0; i < allInteractables.Length;i++)
         {
-            if(item.gameObject.activeSelf)
+            if(allInteractables[i].isActiveAndEnabled)
             {
-
+                AllUnactive = false;
+                break;
             }
+            else
+            {
+                AllUnactive = true;
+            }
+        }
+
+        
+        if(AllUnactive)
+        {
+            ExitSignOff.SetActive(false);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player") && AllUnactive)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
