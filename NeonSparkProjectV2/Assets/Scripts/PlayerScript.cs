@@ -10,7 +10,7 @@ public class PlayerScript : MonoBehaviour
     public float dashSmoothing = 6f;
     public float dashRange = 5f;
     public bool isDashing = false;
-
+    private bool justDashed;
     public float horizontalMove = 0f;
     private SignScript Sign;
     public GameObject signCurrentlyOn;
@@ -150,7 +150,7 @@ public class PlayerScript : MonoBehaviour
 
             }
 
-            if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.5f && canTriggerLastPoint)
+            if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.1f && canTriggerLastPoint)
             {
                 lastTriggerPos = nextTarget.transform.position;
                 canTriggerLastPoint = false;
@@ -159,7 +159,7 @@ public class PlayerScript : MonoBehaviour
                 nextTarget = nextTarget.GetComponent<PointScript>().nextPoint;
 
             }
-            if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.5f && canTriggerLastPoint)
+            if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.1f && canTriggerLastPoint)
             {
 
                 canTriggerLastPoint = false;
@@ -169,8 +169,24 @@ public class PlayerScript : MonoBehaviour
                 prevTarget = prevTarget.GetComponent<PointScript>().prevPoint;
 
             }
+            //stuff added that might not work
+           /* if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && justDashed == true)
+            {
+                if (Input.GetAxisRaw("Horizontal") == 1)
+                {
+                    lastTriggerPos = prevTarget.transform.position;
+                    canTriggerLastPoint = false;
 
+                    prevTarget = nextTarget;
+                }
+                else if (Input.GetAxisRaw("Horizontal") == -1)
+                {
+                    canTriggerLastPoint = false;
+                    lastTriggerPos = nextTarget.transform.position;
 
+                    nextTarget = prevTarget;
+                }
+            }*/
             ImprovedDash();
         }
 
@@ -203,8 +219,9 @@ public class PlayerScript : MonoBehaviour
             yield return null;
         }
         isDashing = false;
-
-        //yield return new WaitForSeconds(3f);
+        justDashed = true;
+        yield return new WaitForSeconds(3f);
+        justDashed = false;
         //print("Dash coroutine is now finished.");
     }
 }

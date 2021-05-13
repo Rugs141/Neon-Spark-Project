@@ -22,7 +22,7 @@ public class PedestrianScript : MonoBehaviour
 
     public bool playerDetected = false;// for detecting when the player is caught
 
-    public float walkTimer = 100f;
+    public float walkTimer = 15f;
 
     private int randomNumGen;// chance to lookup, currently hard coded
     public int min;
@@ -74,7 +74,7 @@ public class PedestrianScript : MonoBehaviour
                 crIsRunning = true;
                 StartCoroutine(AnimateSpotlight(transform.position, SignScanning.transform.position));
             }
-            if (crIsRunning == false && Vector2.Distance(SpotLight.transform.position, SignScanning.transform.position) <= 0.1f) // if the coroutine has finished and the spotlight has reached its target
+            if (crIsRunning == false && Vector2.Distance(SpotLight.transform.position, SignScanning.transform.position) <= 0.1f && lookingForPlayerTimer >= 0.1f) // if the coroutine has finished and the spotlight has reached its target
             {
                 lookingForPlayerTimer -= Time.deltaTime;
                 Detecting(SignScanning);
@@ -117,7 +117,7 @@ public class PedestrianScript : MonoBehaviour
             walkTimer -= Time.deltaTime; // walking timer
         }
 
-        if (Vector2.Distance(transform.position, endPosition.transform.position) <= 0.1f)
+        if (walkTimer <= 0.1f)
         {
             Destroy(gameObject);
         }
