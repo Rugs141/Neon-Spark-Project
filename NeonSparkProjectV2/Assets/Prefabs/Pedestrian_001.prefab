@@ -135,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 577963767908160145}
   - component: {fileID: 9222921425105207241}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spolight_Asset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 94b978ca8fa12eb43a9b4008ac0b06a3, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.28235295}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
