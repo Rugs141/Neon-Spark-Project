@@ -136,7 +136,7 @@ public class PedestrianScript : MonoBehaviour
                 {
                     Debug.Log("player is deaded");
                     playerDetected = true;
-                    SceneManager.LoadScene("FixingAllBeta");
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
             }
         }
