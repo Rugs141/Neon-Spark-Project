@@ -171,11 +171,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5699578028137065687, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
+  stealthScript: {fileID: 0}
   AllSigns: []
   SignScanning: {fileID: 0}
   endPosition: {fileID: 5534634504466959413, guid: d4a660d1c3ed6bb43bace5be4536753c, type: 3}
   SpotLight: {fileID: 8796170308677680416}
-  walkSpeed: 5
+  walkMin: 1
+  walkMax: 4
   IsDetecting: 0
   playerDetected: 0
   walkTimer: 0

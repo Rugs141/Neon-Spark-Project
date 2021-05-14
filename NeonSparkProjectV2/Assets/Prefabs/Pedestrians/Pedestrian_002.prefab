@@ -149,7 +149,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 5935322525494630119, guid: 0a3f6e151cd324846ac1c61f1c1cfcfd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.59, y: 1.12}
@@ -171,12 +171,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5699578028137065687, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
+  stealthScript: {fileID: 0}
   AllSigns: []
   SignScanning: {fileID: 0}
   endPosition: {fileID: 5534634504466959413, guid: d4a660d1c3ed6bb43bace5be4536753c, type: 3}
   SpotLight: {fileID: 8796170308677680416}
-  walkSpeed: 5
+  walkMin: 3
+  walkMax: 6
   IsDetecting: 0
+  detectionTimer: 2
   playerDetected: 0
   walkTimer: 0
   min: 1

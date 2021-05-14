@@ -346,6 +346,11 @@ Transform:
   m_Father: {fileID: 1342448539}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &675282164 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1417898140302545068, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
+  m_PrefabInstance: {fileID: 1417898139792178224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &693670889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1131,6 +1136,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
+      propertyPath: pedestrianSpawnPoint2
+      value: 
+      objectReference: {fileID: 675282164}
     - target: {fileID: 3753010038543812724, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: m_Name
       value: GameManager

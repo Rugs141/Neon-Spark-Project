@@ -929,17 +929,16 @@ PrefabInstance:
       propertyPath: closestDashPoint
       value: 
       objectReference: {fileID: 985766258}
+    - target: {fileID: 5699578028137065687, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
+      propertyPath: currentTarget
+      value: 
+      objectReference: {fileID: 985766258}
     - target: {fileID: 5699578028137065689, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
       propertyPath: m_Name
       value: Player_Test
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
---- !u!1 &1309211388 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1815098955, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-  m_PrefabInstance: {fileID: 1417898139792178224}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1342448538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,50 +1394,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 850751147}
     m_Modifications:
-    - target: {fileID: 867814478, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1182431581
-      objectReference: {fileID: 0}
-    - target: {fileID: 867814478, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1060064787, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -1923316787
-      objectReference: {fileID: 0}
-    - target: {fileID: 1060064787, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304727552, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_Offset.x
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 1304727552, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_Offset.y
-      value: -4
-      objectReference: {fileID: 0}
     - target: {fileID: 1304727553, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: ExitSignOff
       value: 
       objectReference: {fileID: 410618391}
-    - target: {fileID: 1815098956, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1884687489, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -10.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1884687489, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1884687489, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 355546668141105321, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1482,30 +1441,6 @@ PrefabInstance:
     - target: {fileID: 355546668141105321, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: pedestrianSpawnPoint1
-      value: 
-      objectReference: {fileID: 1309211388}
-    - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: pedestrianSpawnPoint2
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: randomMin
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: randomMax
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 712004469459683242, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: pedestrianLimit
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1417898140302545069, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3753010038543812724, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: m_Name
