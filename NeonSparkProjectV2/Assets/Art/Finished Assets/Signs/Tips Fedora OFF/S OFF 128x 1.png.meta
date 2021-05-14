@@ -1,7 +1,16 @@
 fileFormatVersion: 2
-guid: 60cf3ca4496e1c04e8ce2b1f4a883398
+guid: 2f9a8d3dc4483784c93e4b12275687b0
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -8817913595847819558
+    second: S OFF 128x 1_0
+  - first:
+      213: -6000809298053422410
+    second: S OFF 128x 1_1
+  - first:
+      213: -4147101815137532711
+    second: S OFF 128x 1_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:

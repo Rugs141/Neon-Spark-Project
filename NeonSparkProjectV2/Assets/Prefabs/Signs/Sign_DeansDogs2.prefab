@@ -45,8 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 7175302687956233827}
   nextPoint: {fileID: 1362292752371007692}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &1362292752371007692
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,8 +90,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 4896915836841134256}
   nextPoint: {fileID: 192742348150466413}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &3409774210184224341
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,8 +135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 4193262373522752539}
   nextPoint: {fileID: 1362292752371007692}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &3726124517701064192
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,8 +180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 4193262373522752539}
   nextPoint: {fileID: 4896915836841134256}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &4193262373522752539
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,8 +225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 3726124517701064192}
   nextPoint: {fileID: 3409774210184224341}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &4896915836841134256
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,8 +270,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 3726124517701064192}
   nextPoint: {fileID: 7175302687956233827}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &5351055936887766735
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,8 +339,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1923316787
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 1087841048876285909, guid: 8fd0c446928dbdb45a0affb0e16d20b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -447,5 +435,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 4896915836841134256}
   nextPoint: {fileID: 192742348150466413}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5

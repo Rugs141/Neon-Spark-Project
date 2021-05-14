@@ -66,3 +66,6 @@ TagManager:
   - name: Spotlight
     uniqueID: 3426940405
     locked: 0
+  - name: Prompts
+    uniqueID: 3320810613
+    locked: 0
