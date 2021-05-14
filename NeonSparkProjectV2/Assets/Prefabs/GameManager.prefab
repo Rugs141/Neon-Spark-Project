@@ -42,9 +42,10 @@ GameObject:
   - component: {fileID: 712004469459683242}
   - component: {fileID: 1304727552}
   - component: {fileID: 1304727553}
+  - component: {fileID: 2844244460681178480}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,12 +79,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pedestrianPrefab: {fileID: 6357347341226965633, guid: 879c2e66774684c4ab275e70e0ef8139, type: 3}
-  pedestrianLimit: 2
-  pedestrianSpawnPoint1: {fileID: 1815098955}
+  pedestrianLimit: 4
   pedestrianList: {fileID: 0}
   allPedestrians: []
+  allPrefabPedestrians:
+  - {fileID: 6357347341226965633, guid: 879c2e66774684c4ab275e70e0ef8139, type: 3}
+  - {fileID: 6357347341226965633, guid: ffda8f3c1f8807d49bb179b5cf323083, type: 3}
+  - {fileID: 6357347341226965633, guid: 457853b62235fc940a73a56b1a92b787, type: 3}
+  - {fileID: 6357347341226965633, guid: dd8081dda2cc81c438ee7b2a49eea8a9, type: 3}
+  - {fileID: 6357347341226965633, guid: 2bb1e99ef14081142a020280bbe8cd99, type: 3}
+  AllPedestrianSpawnPoints:
+  - {fileID: 1815098955}
+  - {fileID: 1417898140302545068}
   randomMin: 2
-  randomMax: 5
+  randomMax: 4
+  chosenStartPoint: {fileID: 0}
+  chosenEndPoint: {fileID: 0}
 --- !u!61 &1304727552
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -97,7 +108,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 11.761134, y: 7.1691437}
+  m_Offset: {x: 0.75, y: -4}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -124,6 +135,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allInteractables: []
   ExitSignOff: {fileID: 0}
+  pointLight: {fileID: 0}
+--- !u!114 &2844244460681178480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3753010038543812724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 0
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 00000000
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1001 &6873506895780650137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -181,6 +234,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4a660d1c3ed6bb43bace5be4536753c, type: 3}
+--- !u!1 &1417898140302545068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5534634504466959413, guid: d4a660d1c3ed6bb43bace5be4536753c, type: 3}
+  m_PrefabInstance: {fileID: 6873506895780650137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1417898140302545069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5534634504466959412, guid: d4a660d1c3ed6bb43bace5be4536753c, type: 3}
