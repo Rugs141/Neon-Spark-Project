@@ -7,12 +7,19 @@ public class PedestrianScript : MonoBehaviour
 {
 
     public PlayerScript player; // Player script
+    public StealthScript stealthScript; // Player script
+
     public GameObject[] AllSigns;
     public GameObject SignScanning;
     public GameObject endPosition; //position where the pedestrian will end up at
+    private GameObject startPosition;
+
     public GameObject SpotLight;
-    
-    public float walkSpeed; // speed at which the pedestrian walks
+
+
+    public float walkMin;
+    public float walkMax;
+    private float walkSpeed; // speed at which the pedestrian walks
     private bool IsWalking = true;
     private bool IsLooking = false;
 
@@ -22,7 +29,7 @@ public class PedestrianScript : MonoBehaviour
 
     public bool playerDetected = false;// for detecting when the player is caught
 
-    public float walkTimer = 100f;
+    public float walkTimer = 15f;
 
     private int randomNumGen;// chance to lookup, currently hard coded
     public int min;
@@ -39,9 +46,12 @@ public class PedestrianScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
-        
+        stealthScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<StealthScript>();
+        startPosition = stealthScript.chosenStartPoint;
+        endPosition = stealthScript.chosenEndPoint;
+
         walkTimer = 100f;
-        walkSpeed = UnityEngine.Random.Range(2, 5);
+        walkSpeed = UnityEngine.Random.Range(walkMin, walkMax);
 
         AllSigns = GameObject.FindGameObjectsWithTag("Sign");
         SignScanning = AllSigns[UnityEngine.Random.Range(0, AllSigns.Length)]; // randomly chooses a sign
@@ -74,7 +84,7 @@ public class PedestrianScript : MonoBehaviour
                 crIsRunning = true;
                 StartCoroutine(AnimateSpotlight(transform.position, SignScanning.transform.position));
             }
-            if (crIsRunning == false && Vector2.Distance(SpotLight.transform.position, SignScanning.transform.position) <= 0.1f) // if the coroutine has finished and the spotlight has reached its target
+            if (crIsRunning == false && Vector2.Distance(SpotLight.transform.position, SignScanning.transform.position) <= 0.1f && lookingForPlayerTimer >= 0.1f) // if the coroutine has finished and the spotlight has reached its target
             {
                 lookingForPlayerTimer -= Time.deltaTime;
                 Detecting(SignScanning);
@@ -117,7 +127,7 @@ public class PedestrianScript : MonoBehaviour
             walkTimer -= Time.deltaTime; // walking timer
         }
 
-        if (Vector2.Distance(transform.position, endPosition.transform.position) <= 0.1f)
+        if (walkTimer <= 0.1f)
         {
             Destroy(gameObject);
         }

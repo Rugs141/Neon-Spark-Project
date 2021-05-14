@@ -10,13 +10,12 @@ public class PlayerScript : MonoBehaviour
     public float dashSmoothing = 6f;
     public float dashRange = 5f;
     public bool isDashing = false;
-
+    private bool justDashed;
     public float horizontalMove = 0f;
     private SignScript Sign;
     public GameObject signCurrentlyOn;
 
-    public GameObject nextTarget;
-    public GameObject prevTarget;
+    public GameObject currentTarget;
 
     // make a list of node near player that are not on their current sign
     public PointScript[] signPoints;
@@ -27,7 +26,6 @@ public class PlayerScript : MonoBehaviour
     public GameObject closestDashPoint;
     public float closestPointDistance;
 
-    private Vector2 lastTriggerPos;
     public bool canTriggerLastPoint = true;
 
     LineRenderer Line;
@@ -120,57 +118,88 @@ public class PlayerScript : MonoBehaviour
 
     private void Movement()
     {
-        
-        if (Vector2.Distance(gameObject.transform.position, lastTriggerPos) >= 0.1f)
-        {
-            canTriggerLastPoint = true;
-        }
-        
-
         if (isDashing == false)
         {
             //horizontalMove = Input.GetAxisRaw("Horizontal") * playerSpeed;
             //if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == 1)
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                if(Vector3.Dot(MoveDir(), (nextTarget.transform.position - transform.position).normalized) > 0.75f)
+                if (Vector3.Distance(transform.position, currentTarget.transform.position) > 0.05f)
                 {
-                    transform.position = Vector2.MoveTowards(transform.position, nextTarget.transform.position, playerSpeed * Time.deltaTime);
-                    var test = gameObject.GetComponent<SpriteRenderer>();
-                    test.flipX = false;
+                    // move toward the current target
+                    if (Vector3.Dot(MoveDir(), (currentTarget.transform.position - transform.position).normalized) > 0.85f)
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, currentTarget.transform.position, playerSpeed * Time.deltaTime);
+                        var test = gameObject.GetComponent<SpriteRenderer>();
+                        test.flipX = false;
+                    }
+                    // move toward the next target
+                    else if (Vector3.Dot(MoveDir(), (currentTarget.GetComponent<PointScript>().nextPoint.transform.position - transform.position).normalized) > 0.85f)
+                    {
+                        if (Vector3.Dot((transform.position - currentTarget.transform.position).normalized, (currentTarget.GetComponent<PointScript>().nextPoint.transform.position - currentTarget.transform.position).normalized) > 0.75f)
+                        {
+                            transform.position = Vector2.MoveTowards(transform.position, currentTarget.GetComponent<PointScript>().nextPoint.transform.position, playerSpeed * Time.deltaTime);
+                            var test = gameObject.GetComponent<SpriteRenderer>();
+                            test.flipX = false;
+                        }
+                    }
+                    // move toward the previus target
+                    else if (Vector3.Dot(MoveDir(), (currentTarget.GetComponent<PointScript>().prevPoint.transform.position - transform.position).normalized) > 0.85f)
+                    {
+                        if (Vector3.Dot((transform.position - currentTarget.transform.position).normalized, (currentTarget.GetComponent<PointScript>().prevPoint.transform.position - currentTarget.transform.position).normalized) > 0.75f)
+                        {
+                            transform.position = Vector2.MoveTowards(transform.position, currentTarget.GetComponent<PointScript>().prevPoint.transform.position, playerSpeed * Time.deltaTime);
+                            var test = gameObject.GetComponent<SpriteRenderer>();
+                            test.flipX = true;
+                        }
+                    }
+                }
+                else
+                {
+                    if (Vector3.Dot(MoveDir(), (currentTarget.GetComponent<PointScript>().nextPoint.transform.position - transform.position).normalized) > 0.85f)
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, currentTarget.GetComponent<PointScript>().nextPoint.transform.position, playerSpeed * Time.deltaTime);
+                        var test = gameObject.GetComponent<SpriteRenderer>();
+                        test.flipX = false;
+                    }
+                    else if (Vector3.Dot(MoveDir(), (currentTarget.GetComponent<PointScript>().prevPoint.transform.position - transform.position).normalized) > 0.85f)
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, currentTarget.GetComponent<PointScript>().prevPoint.transform.position, playerSpeed * Time.deltaTime);
+                        var test = gameObject.GetComponent<SpriteRenderer>();
+                        test.flipX = true;
+                    }
                 }
 
-                else if (Vector3.Dot(MoveDir(), (prevTarget.transform.position - transform.position).normalized) > 0.75f)
+            }
+
+            if (Vector2.Distance(gameObject.transform.position, currentTarget.GetComponent<PointScript>().nextPoint.transform.position) <= 0.05f)
+            {
+                currentTarget = currentTarget.GetComponent<PointScript>().nextPoint;
+            }
+            if (Vector2.Distance(gameObject.transform.position, currentTarget.GetComponent<PointScript>().prevPoint.transform.position) <= 0.05f)
+            {
+                currentTarget = currentTarget.GetComponent<PointScript>().prevPoint;
+
+                canTriggerLastPoint = false;
+            }
+            //stuff added that might not work
+           /* if ((Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && justDashed == true)
+            {
+                if (Input.GetAxisRaw("Horizontal") == 1)
                 {
+                    lastTriggerPos = prevTarget.transform.position;
+                    canTriggerLastPoint = false;
 
-                    transform.position = Vector2.MoveTowards(transform.position, prevTarget.transform.position, playerSpeed * Time.deltaTime);
-                    var test = gameObject.GetComponent<SpriteRenderer>();
-                    test.flipX = true;
+                    prevTarget = nextTarget;
                 }
+                else if (Input.GetAxisRaw("Horizontal") == -1)
+                {
+                    canTriggerLastPoint = false;
+                    lastTriggerPos = nextTarget.transform.position;
 
-            }
-
-            if (Vector2.Distance(gameObject.transform.position, nextTarget.transform.position) <= 0.5f && canTriggerLastPoint)
-            {
-                lastTriggerPos = nextTarget.transform.position;
-                canTriggerLastPoint = false;
-
-                prevTarget = nextTarget;
-                nextTarget = nextTarget.GetComponent<PointScript>().nextPoint;
-
-            }
-            if (Vector2.Distance(gameObject.transform.position, prevTarget.transform.position) <= 0.5f && canTriggerLastPoint)
-            {
-
-                canTriggerLastPoint = false;
-                lastTriggerPos = prevTarget.transform.position;
-
-                nextTarget = prevTarget;
-                prevTarget = prevTarget.GetComponent<PointScript>().prevPoint;
-
-            }
-
-
+                    nextTarget = prevTarget;
+                }
+            }*/
             ImprovedDash();
         }
 
@@ -188,8 +217,10 @@ public class PlayerScript : MonoBehaviour
             //  transform.position = closestDashPoint.transform.position;
             StartCoroutine(AnimateDash(transform.position, closestDashPoint.transform.position));  // "dashDuration" should maybe be smoothing???
             signCurrentlyOn = closestDashPoint.transform.parent.gameObject.transform.parent.gameObject;
-            nextTarget = closestDashPoint.GetComponent<PointScript>().nextPoint;
-            prevTarget = closestDashPoint.GetComponent<PointScript>().prevPoint;
+            //nextTarget = closestDashPoint.GetComponent<PointScript>().nextPoint;
+            //prevTarget = closestDashPoint.GetComponent<PointScript>().prevPoint;
+
+            currentTarget = closestDashPoint;
             isDashing = true;
         }
         
@@ -203,8 +234,9 @@ public class PlayerScript : MonoBehaviour
             yield return null;
         }
         isDashing = false;
-
-        //yield return new WaitForSeconds(3f);
+        justDashed = true;
+        yield return new WaitForSeconds(3f);
+        justDashed = false;
         //print("Dash coroutine is now finished.");
     }
 }

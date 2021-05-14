@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal;
 public class GameManager : MonoBehaviour
 {
     public enum GameState { running, paused, completed, fail}
@@ -10,6 +11,7 @@ public class GameManager : MonoBehaviour
     private bool AllUnactive;
 
     public GameObject ExitSignOff;
+    public Light2D pointLight;
 
 
     //reference to the stealth stuff (most likely move the stealth stuff here
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         allInteractables = GameObject.Find("Interactables").GetComponentsInChildren<InteractableScript>();
+        pointLight = gameObject.GetComponent<Light2D>();
         ExitSignOff.SetActive(true);
         AllUnactive = false;
     }
@@ -46,6 +49,7 @@ public class GameManager : MonoBehaviour
         {
             ExitSignOff.SetActive(false);
             Debug.Log("All are unactive");
+            pointLight.enabled = true;
         }
     }
 
