@@ -45,8 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 4219129379660992509}
   nextPoint: {fileID: 2411482723200559177}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &851770022596278668
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,8 +114,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1923316787
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4651371526424825486, guid: 9b9f726ae3d534441be4512767da0db2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -175,8 +173,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 690655327018961744}
   nextPoint: {fileID: 5009668166201179506}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &4219129379660992509
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,8 +218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 5009668166201179506}
   nextPoint: {fileID: 690655327018961744}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &5009668166201179506
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,8 +263,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prevPoint: {fileID: 2411482723200559177}
   nextPoint: {fileID: 4219129379660992509}
-  player: {fileID: 0}
-  distanceBetweenPlayer: 5
 --- !u!1 &9193332679388520370
 GameObject:
   m_ObjectHideFlags: 0
