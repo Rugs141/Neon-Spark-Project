@@ -24,6 +24,11 @@ public class StealthScript : MonoBehaviour
     public int randomMin;
     public int randomMax;
 
+    [HideInInspector]
+    public GameObject chosenStartPoint;
+    [HideInInspector]
+    public GameObject chosenEndPoint;
+
     //have a reference to all the pedestrians and check if there looking, if too many are then make them not be able to look
     //maybe they can ask the stealth script if they can look
 
@@ -67,9 +72,17 @@ public class StealthScript : MonoBehaviour
 
             // GameObject pedestrian;
             chosenPedestrian = allPrefabPedestrians[Random.Range(0, allPrefabPedestrians.Count + 1)];
-            GameObject chosenSpawnPoint = AllPedestrianSpawnPoints[Random.Range(0, AllPedestrianSpawnPoints.Count + 1)];
+            GameObject chosenStartPoint = AllPedestrianSpawnPoints[Random.Range(0, AllPedestrianSpawnPoints.Count + 1)];
+            if (chosenStartPoint == AllPedestrianSpawnPoints[0])
+            {
+                chosenEndPoint = AllPedestrianSpawnPoints[1];
+            }
+            else if (chosenStartPoint == AllPedestrianSpawnPoints[1])
+            {
+                chosenEndPoint = AllPedestrianSpawnPoints[0];
+            }
 
-            Instantiate(chosenPedestrian, chosenPedestrian.transform.position, Quaternion.identity, pedestrianList.transform);
+            Instantiate(chosenPedestrian, chosenStartPoint.transform.position, Quaternion.identity, pedestrianList.transform);
             //allPedestrians.Add(pedestrian);
 
 

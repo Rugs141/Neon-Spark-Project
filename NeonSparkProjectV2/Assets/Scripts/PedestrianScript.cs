@@ -7,12 +7,19 @@ public class PedestrianScript : MonoBehaviour
 {
 
     public PlayerScript player; // Player script
+    public StealthScript stealthScript; // Player script
+
     public GameObject[] AllSigns;
     public GameObject SignScanning;
     public GameObject endPosition; //position where the pedestrian will end up at
+    private GameObject startPosition;
+
     public GameObject SpotLight;
-    
-    public float walkSpeed; // speed at which the pedestrian walks
+
+
+    public float walkMin;
+    public float walkMax;
+    private float walkSpeed; // speed at which the pedestrian walks
     private bool IsWalking = true;
     private bool IsLooking = false;
 
@@ -39,9 +46,12 @@ public class PedestrianScript : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
-        
+        stealthScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<StealthScript>();
+        startPosition = stealthScript.chosenStartPoint;
+        endPosition = stealthScript.chosenEndPoint;
+
         walkTimer = 100f;
-        walkSpeed = UnityEngine.Random.Range(2, 5);
+        walkSpeed = UnityEngine.Random.Range(walkMin, walkMax);
 
         AllSigns = GameObject.FindGameObjectsWithTag("Sign");
         SignScanning = AllSigns[UnityEngine.Random.Range(0, AllSigns.Length)]; // randomly chooses a sign
