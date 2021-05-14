@@ -25,7 +25,7 @@ public class PedestrianScript : MonoBehaviour
 
     public bool IsDetecting;
 
-    private float detectionTimer = 2f; // for use in the timing of the pedestrians 'walking' and 'searching proceedures 
+    public float detectionTimer = 2f; // 
 
     public bool playerDetected = false;// for detecting when the player is caught
 
@@ -50,7 +50,7 @@ public class PedestrianScript : MonoBehaviour
         startPosition = stealthScript.chosenStartPoint;
         endPosition = stealthScript.chosenEndPoint;
 
-        walkTimer = 100f;
+        walkTimer = 15f;
         walkSpeed = UnityEngine.Random.Range(walkMin, walkMax);
 
         AllSigns = GameObject.FindGameObjectsWithTag("Sign");

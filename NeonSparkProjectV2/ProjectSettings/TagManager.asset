@@ -8,6 +8,7 @@ TagManager:
   - Point
   - Interactable
   - ExitSign
+  - GameManager
   layers:
   - Default
   - TransparentFX

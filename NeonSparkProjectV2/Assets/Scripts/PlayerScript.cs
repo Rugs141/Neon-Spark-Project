@@ -16,6 +16,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject signCurrentlyOn;
 
     public GameObject currentTarget;
+    private float pathSwitchLeniency = 0.1f;
 
     // make a list of node near player that are not on their current sign
     public PointScript[] signPoints;
@@ -124,7 +125,7 @@ public class PlayerScript : MonoBehaviour
             //if (Input.GetAxisRaw("Horizontal") != 0 && Input.GetAxisRaw("Horizontal") == 1)
             if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
-                if (Vector3.Distance(transform.position, currentTarget.transform.position) > 0.05f)
+                if (Vector3.Distance(transform.position, currentTarget.transform.position) > pathSwitchLeniency + 0.15f)
                 {
                     // move toward the current target
                     if (Vector3.Dot(MoveDir(), (currentTarget.transform.position - transform.position).normalized) > 0.85f)
@@ -168,15 +169,21 @@ public class PlayerScript : MonoBehaviour
                         var test = gameObject.GetComponent<SpriteRenderer>();
                         test.flipX = true;
                     }
+                    else if (Vector3.Dot(MoveDir(), (currentTarget.transform.position - transform.position).normalized) > 0.85f)
+                    {
+                        transform.position = Vector2.MoveTowards(transform.position, currentTarget.transform.position, playerSpeed * Time.deltaTime);
+                        var test = gameObject.GetComponent<SpriteRenderer>();
+                        test.flipX = false;
+                    }
                 }
 
             }
 
-            if (Vector2.Distance(gameObject.transform.position, currentTarget.GetComponent<PointScript>().nextPoint.transform.position) <= 0.05f)
+            if (Vector2.Distance(gameObject.transform.position, currentTarget.GetComponent<PointScript>().nextPoint.transform.position) <= pathSwitchLeniency)
             {
                 currentTarget = currentTarget.GetComponent<PointScript>().nextPoint;
             }
-            if (Vector2.Distance(gameObject.transform.position, currentTarget.GetComponent<PointScript>().prevPoint.transform.position) <= 0.05f)
+            if (Vector2.Distance(gameObject.transform.position, currentTarget.GetComponent<PointScript>().prevPoint.transform.position) <= pathSwitchLeniency)
             {
                 currentTarget = currentTarget.GetComponent<PointScript>().prevPoint;
 
