@@ -135,6 +135,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1787337144}
     m_Modifications:
+    - target: {fileID: 5058817944503399746, guid: bccc2c7e8db36ce4690ad72090b7a5f6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5058817944577488668, guid: bccc2c7e8db36ce4690ad72090b7a5f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.59
@@ -933,6 +937,10 @@ PrefabInstance:
       propertyPath: currentTarget
       value: 
       objectReference: {fileID: 985766258}
+    - target: {fileID: 5699578028137065687, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
+      propertyPath: particleDash
+      value: 
+      objectReference: {fileID: 411496904913511225, guid: d5e4103cd9eab774b960933a9fa9463d, type: 3}
     - target: {fileID: 5699578028137065689, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
       propertyPath: m_Name
       value: Player_Test
@@ -1213,6 +1221,30 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1548001694 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5058817944577488671, guid: bccc2c7e8db36ce4690ad72090b7a5f6, type: 3}
+  m_PrefabInstance: {fileID: 147067109}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1548001696
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548001694}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d836286da7d0c924e883f87037bec8fa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1572232618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1398,6 +1430,10 @@ PrefabInstance:
       propertyPath: ExitSignOff
       value: 
       objectReference: {fileID: 410618391}
+    - target: {fileID: 1304727553, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
+      propertyPath: exitSignOn
+      value: 
+      objectReference: {fileID: 1548001694}
     - target: {fileID: 355546668141105321, guid: dfa4fa240e13dfd4d8d97c6394758b5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

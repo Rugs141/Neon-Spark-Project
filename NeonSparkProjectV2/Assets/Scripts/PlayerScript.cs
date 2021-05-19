@@ -31,18 +31,18 @@ public class PlayerScript : MonoBehaviour
 
     LineRenderer Line;
 
-    private bool crIsRunning = false;
-    Rigidbody2D rb;
+    private ParticleSystem particles;
     // Start is called before the first frame update
 
-
+    public GameObject particleDash;
     void Start()
     {
         signPoints = GameObject.Find("Signs").GetComponentsInChildren<PointScript>();
 
+        particles = particleDash.GetComponent<ParticleSystem>();
+
         Sign = signCurrentlyOn.GetComponent<SignScript>();
         Line = gameObject.GetComponent<LineRenderer>();
-        rb = GetComponent<Rigidbody2D>();
     }
 
 
@@ -228,6 +228,7 @@ public class PlayerScript : MonoBehaviour
             //prevTarget = closestDashPoint.GetComponent<PointScript>().prevPoint;
 
             currentTarget = closestDashPoint;
+            Instantiate(particleDash,gameObject.transform);
             isDashing = true;
         }
         
