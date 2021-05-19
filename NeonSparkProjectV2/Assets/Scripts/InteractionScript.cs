@@ -40,9 +40,8 @@ public class InteractionScript : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.E) && closestInteractable != null)
+        if(closestInteractable != null)
         {
-            Debug.Log("it fully works");
             //Destroy(closestInteractable);
             closestInteractable.gameObject.SetActive(false);
         }

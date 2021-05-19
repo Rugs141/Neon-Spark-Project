@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     public InteractableScript[] allInteractables;
     private bool AllUnactive;
 
-    public GameObject ExitSignOff;
+    public GameObject exitSignOn;
+    private Animator exitSignOnAnimator;
     public Light2D pointLight;
 
 
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         allInteractables = GameObject.Find("Interactables").GetComponentsInChildren<InteractableScript>();
         pointLight = gameObject.GetComponent<Light2D>();
-        ExitSignOff.SetActive(true);
+        exitSignOnAnimator = exitSignOn.GetComponent<Animator>();
         AllUnactive = false;
     }
 
@@ -47,18 +48,15 @@ public class GameManager : MonoBehaviour
         
         if(AllUnactive)
         {
-            ExitSignOff.SetActive(false);
-            Debug.Log("All are unactive");
+            exitSignOnAnimator.SetBool("IsUnactive", true);
             pointLight.enabled = true;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.transform.gameObject.name);
         if(collision.CompareTag("Player") && AllUnactive)
         {
-            print("should work");
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
