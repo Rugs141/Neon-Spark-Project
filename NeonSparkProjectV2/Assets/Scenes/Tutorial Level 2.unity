@@ -1622,6 +1622,10 @@ PrefabInstance:
       propertyPath: currentTarget
       value: 
       objectReference: {fileID: 724965874}
+    - target: {fileID: 5699578028137065687, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
+      propertyPath: particleDash
+      value: 
+      objectReference: {fileID: 411496904913511225, guid: d5e4103cd9eab774b960933a9fa9463d, type: 3}
     - target: {fileID: 5699578028137065689, guid: ad7bdfc9cb0a11f47a684a71f3429a13, type: 3}
       propertyPath: m_Name
       value: Player_Test

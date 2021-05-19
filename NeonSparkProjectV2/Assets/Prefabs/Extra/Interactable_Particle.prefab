@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3538449926619785010}
   - component: {fileID: 6431378727518567386}
   - component: {fileID: 6667030221588194428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Interactable_Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,7 +659,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 0
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
