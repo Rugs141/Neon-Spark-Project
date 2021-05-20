@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    #region Vars
     public float playerSpeed = 40f;
     public float dashDuration = 1f;
     public float dashSmoothing = 6f;
@@ -31,13 +32,18 @@ public class PlayerScript : MonoBehaviour
 
     LineRenderer Line;
 
+    private AudioSource Player_Dash_Sound;
+
     private ParticleSystem particles;
     // Start is called before the first frame update
 
     public GameObject particleDash;
+    #endregion
     void Start()
     {
         signPoints = GameObject.Find("Signs").GetComponentsInChildren<PointScript>();
+
+        Player_Dash_Sound = GameObject.Find("Player_Dash").GetComponent<AudioSource>();
 
         particles = particleDash.GetComponent<ParticleSystem>();
 
@@ -228,6 +234,8 @@ public class PlayerScript : MonoBehaviour
             //prevTarget = closestDashPoint.GetComponent<PointScript>().prevPoint;
 
             currentTarget = closestDashPoint;
+
+            Player_Dash_Sound.Play();
             Instantiate(particleDash,gameObject.transform);
             isDashing = true;
         }
