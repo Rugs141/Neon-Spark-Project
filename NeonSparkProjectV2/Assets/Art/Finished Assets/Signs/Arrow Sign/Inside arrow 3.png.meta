@@ -1,16 +1,7 @@
 fileFormatVersion: 2
-guid: 2f9a8d3dc4483784c93e4b12275687b0
+guid: 898961d555a5d6641b7b94b4c56aa9e1
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -8817913595847819558
-    second: S OFF 128x 1_0
-  - first:
-      213: -6000809298053422410
-    second: S OFF 128x 1_1
-  - first:
-      213: -4147101815137532711
-    second: S OFF 128x 1_2
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -50,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -144,28 +135,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: S OFF 128x 1_1
-      rect:
-        serializedVersion: 2
-        x: 82
-        y: 93
-        width: 16
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b22aa0bcb7d8bca0800000000000000
-      internalID: -6000809298053422410
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
