@@ -8,15 +8,22 @@ public class InteractionScript : MonoBehaviour
     // make a list to get all interactable signs with the tag
 
     public InteractableScript[] allInteractables;
+    private AudioSource Player_Fixed_Sound;
     public GameObject closestInteractable;
     public float closestInteractableDistance;
     public PlayerScript playerScript;
 
     public float interactRange = 10f;
+
+
+    [SerializeField]
+    public int AllUnactiveInteractables;
     // Start is called before the first frame update
     void Start()
     {
         allInteractables = GameObject.Find("Interactables").GetComponentsInChildren<InteractableScript>(); //placeholder 'interactionscript'
+        Player_Fixed_Sound = GameObject.Find("Player_Fixed").GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -43,7 +50,14 @@ public class InteractionScript : MonoBehaviour
         if(closestInteractable != null)
         {
             //Destroy(closestInteractable);
-            closestInteractable.gameObject.SetActive(false);
+            if (closestInteractable.activeInHierarchy == true)
+            {
+                closestInteractable.gameObject.SetActive(false);
+                AllUnactiveInteractables++;
+
+                Player_Fixed_Sound.Play();
+            }
+            
         }
     }
     // get all interactablesign in the game

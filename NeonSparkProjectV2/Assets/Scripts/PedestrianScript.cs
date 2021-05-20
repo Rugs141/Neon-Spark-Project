@@ -41,10 +41,15 @@ public class PedestrianScript : MonoBehaviour
 
 
     private bool crIsRunning = false;
+    private AudioSource Pedestrian_Alert_Sound;
+
     // Start is called before the first frame update
 
     void Start()
     {
+        Pedestrian_Alert_Sound = GameObject.Find("Pedestrian_Alert").GetComponent<AudioSource>();
+
+
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>();
         stealthScript = GameObject.FindGameObjectWithTag("GameManager").GetComponent<StealthScript>();
         startPosition = stealthScript.chosenStartPoint;
@@ -95,7 +100,6 @@ public class PedestrianScript : MonoBehaviour
         {
             IsWalking = true;
             IsDetecting = false;
-            Debug.Log("nolongercheckingforpeeps");
             SpotLight.SetActive(false);
 
         }
@@ -138,6 +142,7 @@ public class PedestrianScript : MonoBehaviour
         Debug.Log("now searching for player on " + SignScanning.name);
         if (player.signCurrentlyOn != null)
         {
+                Pedestrian_Alert_Sound.Play();
             if (player.signCurrentlyOn == SignScanning)
             {
 
